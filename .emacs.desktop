@@ -1,0 +1,51 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Dec 12 11:55:01 2011
+;; Desktop file format version 206
+;; Emacs version 24.0.92.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring '("workgrou"))
+(setq register-alist nil)
+(setq file-name-history '("~/.emacs.d/" "/Users/soro/.emacs.d/soro.el" "/Users/soro/code/patch/hacking.org"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/Users/soro/.emacs.d/soro.el"
+  "soro.el"
+  'emacs-lisp-mode
+  '(auto-fill-mode textmate-mode paredit-mode elisp-slime-nav-mode eldoc-mode hi-lock-mode)
+  95
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (column-number-mode . t)))
+
+(desktop-create-buffer 206
+  "/Users/soro/code/patch/hacking.org"
+  "hacking.org"
+  'org-mode
+  '(auto-fill-mode textmate-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/soro/.emacs.d/elpa/workgroups-0.2.0/workgroups-autoloads.el"
+  "workgroups-autoloads.el"
+  'emacs-lisp-mode
+  '(auto-fill-mode textmate-mode paredit-mode elisp-slime-nav-mode eldoc-mode)
+  185
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (column-number-mode . t)))
+
