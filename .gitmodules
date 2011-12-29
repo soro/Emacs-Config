@@ -1,0 +1,6 @@
+[submodule "vendor/geiser"]
+	path = vendor/geiser
+	url = http://git.sv.gnu.org/r/geiser.git
+[submodule "vendor/haskell-mode"]
+	path = vendor/haskell-mode
+	url = https://github.com/pheaver/haskell-mode.git

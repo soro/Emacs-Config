@@ -5,3 +5,5 @@ backups
 *.swp
 *#
 #*
+
+.emacs.desktop
