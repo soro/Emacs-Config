@@ -9,8 +9,11 @@
                            starter-kit-bindings
                            starter-kit-eshell
                            magit
+                           magithub
+                           gist
                            paredit
                            smex
+                           solarized-theme
                            ido-ubiquitous
                            idle-highlight-mode
                            workgroups
@@ -61,5 +64,66 @@
 ;; set up agda mode
 (load-file (let ((coding-system-for-read 'utf-8))
              (shell-command-to-string "agda-mode locate")))
+
+
+;; load ensime
+(add-to-list 'load-path "~/.emacs.d/vendor/ensime/elisp/")
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+
+;; set up abbrevs for unicode symbols
+(define-abbrev-table 'global-abbrev-table '(
+    ("alpha" "α" nil 0)
+    ("beta" "β" nil 0)
+    ("gamma" "γ" nil 0)
+    ("theta" "θ" nil 0)
+    ("inf" "∞" nil 0)
+    ("|@|" " ⊛" nil 0)
+    ("forever" "∞" nil 0)
+    ("jjoin" "μ" nil 0)
+    ("cojoin" "υ" nil 0)
+    ("copure" "ε" nil 0)
+    ("comap" "∙" nil 0)
+    ("mmap" "∘" nil 0)
+    ("ppure" "η" nil 0)
+    ("kleisli" "☆" nil 0)
+    ("cokleisli" "★" nil 0)
+    ("dual" "σ" nil 0)
+    ("equal" "≟" nil 0)
+    ("notequal" "≠" nil 0)
+    ("sum" "∑" nil 0)
+    ("aany" "∃" nil 0)
+    ("aall" "∀" nil 0)
+    ("ttraverse" "↦" nil 0)
+    ("ar1" "→" nil 0)
+    ("ar2" "⇒" nil 0)
+    ("ppure" "η" nil 0)
+    ))
+;; ===========
+
+;; emulate vims *
+(require 'thingatpt)
+
+(defun my-isearch-yank-word-or-char-from-beginning ()
+  "Move to beginning of word before yanking word in isearch-mode."
+  (interactive)
+  ;; Making this work after a search string is entered by user
+  ;; is too hard to do, so work only when search string is empty.
+  (if (= 0 (length isearch-string))
+      (beginning-of-thing 'word))
+  (isearch-yank-word-or-char)
+  ;; Revert to 'isearch-yank-word-or-char for subsequent calls
+  (substitute-key-definition 'my-isearch-yank-word-or-char-from-beginning 
+			     'isearch-yank-word-or-char
+			     isearch-mode-map))
+
+(add-hook 'isearch-mode-hook
+ (lambda ()
+   "Activate my customized Isearch word yank command."
+   (substitute-key-definition 'isearch-yank-word-or-char 
+			      'my-isearch-yank-word-or-char-from-beginning
+			      isearch-mode-map)))
+;; =============
 
 (server-start)
