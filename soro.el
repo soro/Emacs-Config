@@ -1,5 +1,9 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
 ;; always install default packages if they aren't present
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -13,7 +17,6 @@
                            gist
                            paredit
                            smex
-                           solarized-theme
                            ido-ubiquitous
                            idle-highlight-mode
                            workgroups
@@ -44,7 +47,7 @@
 (setq geiser-active-implementations '(racket))
 
 ;; load zenburn with check set to false
-(load-theme 'zenburn 't)
+(load-theme 'solarized-dark 't)
 
 ;; load textmate-mode for peepopen
 (textmate-mode)
@@ -65,12 +68,25 @@
 (load-file (let ((coding-system-for-read 'utf-8))
              (shell-command-to-string "agda-mode locate")))
 
+;; load mark multiple
+(add-to-list 'load-path "~/.emacs.d/vendor/mark-multiple/")
+(require 'inline-string-rectangle)
+(global-set-key (kbd "C-x r t") 'inline-string-rectangle)
+
+(require 'mark-more-like-this)
+(global-set-key (kbd "C-<") 'mark-previous-like-this)
+(global-set-key (kbd "C->") 'mark-next-like-this)
+(global-set-key (kbd "C-M-m") 'mark-more-like-this)
+
+;; load expand region
+(add-to-list 'load-path "~/.emacs.d/vendor/expand-region/")
+(require 'expand-region)
+(global-set-key (kbd "C-@") 'er/expand-region)
 
 ;; load ensime
 (add-to-list 'load-path "~/.emacs.d/vendor/ensime/elisp/")
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-
 
 ;; set up abbrevs for unicode symbols
 (define-abbrev-table 'global-abbrev-table '(

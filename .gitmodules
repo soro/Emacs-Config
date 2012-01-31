@@ -4,3 +4,12 @@
 [submodule "vendor/haskell-mode"]
 	path = vendor/haskell-mode
 	url = https://github.com/pheaver/haskell-mode.git
+[submodule "vendor/mark-multiple"]
+	path = vendor/mark-multiple
+	url = https://github.com/magnars/mark-multiple.el.git
+[submodule "vendor/expand-region"]
+	path = vendor/expand-region
+	url = https://github.com/magnars/expand-region.el.git
+[submodule "vendor/solarized-theme"]
+	path = vendor/solarized-theme
+	url = https://github.com/bbatsov/solarized-emacs.git
