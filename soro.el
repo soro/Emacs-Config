@@ -1,5 +1,3 @@
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
@@ -46,7 +44,10 @@
 (load-file "~/.emacs.d/vendor/geiser/elisp/geiser.el")
 (setq geiser-active-implementations '(racket))
 
-;; load zenburn with check set to false
+;; load solarized-dark with no check
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/solarized-theme/")
+(add-to-list 'load-path "~/.emacs.d/vendor/solarized-theme/")
 (load-theme 'solarized-dark 't)
 
 ;; load textmate-mode for peepopen
@@ -77,6 +78,14 @@
 (global-set-key (kbd "C-<") 'mark-previous-like-this)
 (global-set-key (kbd "C->") 'mark-next-like-this)
 (global-set-key (kbd "C-M-m") 'mark-more-like-this)
+
+;; load iy-go-to-char
+(add-to-list 'load-path "~/.emacs.d/vendor/go-to-char/")
+(require 'iy-go-to-char)
+(global-set-key (kbd "M-n") 'iy-go-to-char)
+(global-set-key (kbd "M-N") 'iy-go-to-char-backward)
+(global-set-key (kbd "C-c ;") 'iy-go-to-char-continue)
+(global-set-key (kbd "C-c ,") 'iy-go-to-char-continue-backward)
 
 ;; load expand region
 (add-to-list 'load-path "~/.emacs.d/vendor/expand-region/")
