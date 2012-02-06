@@ -97,17 +97,6 @@
   (setenv "PATH" (concat "/Users/soro/.cabal/bin:/usr/local/homebrew/bin:/Applications/Racket/bin:" (getenv "PATH")))
   (setq exec-path (append exec-path '("/Users/soro/.cabal/bin" "/usr/local/homebrew/bin" "/Applications/Racket/bin"))))
 
-;; proof general and Coq
-(load-file "~/.emacs.d/vendor/ProofGeneral/generic/proof-site.el")
-(setq auto-mode-alist (cons '("\.v$" . coq-mode) auto-mode-alist))
-(autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
-
-(setq slime-net-coding-system 'utf-8-unix)
-
-;; set up agda mode
-(load-file (let ((coding-system-for-read 'utf-8))
-             (shell-command-to-string "agda-mode locate")))
-
 ;; load mark multiple
 (add-to-list 'load-path "~/.emacs.d/vendor/mark-multiple/")
 (require 'inline-string-rectangle)
