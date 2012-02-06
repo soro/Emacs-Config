@@ -13,3 +13,6 @@
 [submodule "vendor/solarized-theme"]
 	path = vendor/solarized-theme
 	url = https://github.com/bbatsov/solarized-emacs.git
+[submodule "vendor/ack-and-a-half"]
+	path = vendor/ack-and-a-half
+	url = https://github.com/jhelwig/ack-and-a-half.git
