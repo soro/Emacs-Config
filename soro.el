@@ -24,8 +24,17 @@
                            bookmark+
                            auctex
                            magit
+                           magit-gh-pulls
                            magithub
                            gist))
+
+
+;; yes, i've given in once again, the seductive powers of evil are just too great
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)
+;; disable by default until i'm happy with emacs and insert mode..
+;;(evil-mode 1)
+
 
 (dolist (pac default-packages)
   (when (not (package-installed-p pac))
@@ -40,8 +49,8 @@
 ;; provide a bit more tiling feel to emacs buffers
 (global-set-key (kbd "H-j") (lambda () (interactive) (enlarge-window 5)))
 (global-set-key (kbd "H-k") (lambda () (interactive) (enlarge-window -5)))
-(global-set-key (kbd "H-h") (lambda () (interactive) (enlarge-window -5 t)))
-(global-set-key (kbd "H-l") (lambda () (interactive) (enlarge-window 5 t)))
+(global-set-key (kbd "H-l") (lambda () (interactive) (enlarge-window -5 t)))
+(global-set-key (kbd "H-h") (lambda () (interactive) (enlarge-window 5 t)))
 
 ;; set up ack and a half
 (add-to-list 'load-path "~/.emacs.d/vendor/ack-and-a-half/")

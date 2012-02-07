@@ -16,3 +16,6 @@
 [submodule "vendor/ack-and-a-half"]
 	path = vendor/ack-and-a-half
 	url = https://github.com/jhelwig/ack-and-a-half.git
+[submodule "evil"]
+	path = evil
+	url = git://gitorious.org/evil/evil.git
