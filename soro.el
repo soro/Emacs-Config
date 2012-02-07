@@ -10,10 +10,8 @@
                            starter-kit-lisp
                            starter-kit-bindings
                            starter-kit-eshell
-                           magit
-                           magithub
-                           gist
                            paredit
+                           ack-and-a-half
                            smex
                            ido-ubiquitous
                            idle-highlight-mode
@@ -22,13 +20,30 @@
                            undo-tree
                            slime
                            scala-mode
+                           clojure-mode
                            http-twiddle
                            bookmark+
-                           auctex))
+                           auctex
+                           magit
+                           magithub
+                           gist))
 
 (dolist (pac default-packages)
   (when (not (package-installed-p pac))
     (package-install pac)))
+
+
+;; rebind command and option on osx
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'hyper))
+
+
+;; provide a bit more tiling feel to emacs buffers
+(global-set-key (kbd "H-j") (lambda () (interactive) (enlarge-window 5)))
+(global-set-key (kbd "H-k") (lambda () (interactive) (enlarge-window -5)))
+(global-set-key (kbd "H-h") (lambda () (interactive) (enlarge-window -5 t)))
+(global-set-key (kbd "H-l") (lambda () (interactive) (enlarge-window 5 t)))
 
 
 ;; window and session management
@@ -150,5 +165,6 @@
 			      'my-isearch-yank-word-or-char-from-beginning
 			      isearch-mode-map)))
 ;; =============
+
 
 (server-start)

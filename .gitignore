@@ -6,4 +6,10 @@ backups
 *#
 #*
 
+elpa/*
+.smex-items
+eshell/*
+places
+url/cookies
+
 .emacs.desktop
