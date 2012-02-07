@@ -11,7 +11,6 @@
                            starter-kit-bindings
                            starter-kit-eshell
                            paredit
-                           ack-and-a-half
                            smex
                            ido-ubiquitous
                            idle-highlight-mode
@@ -38,13 +37,22 @@
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'hyper))
 
-
 ;; provide a bit more tiling feel to emacs buffers
 (global-set-key (kbd "H-j") (lambda () (interactive) (enlarge-window 5)))
 (global-set-key (kbd "H-k") (lambda () (interactive) (enlarge-window -5)))
 (global-set-key (kbd "H-h") (lambda () (interactive) (enlarge-window -5 t)))
 (global-set-key (kbd "H-l") (lambda () (interactive) (enlarge-window 5 t)))
 
+;; set up ack and a half
+(add-to-list 'load-path "~/.emacs.d/vendor/ack-and-a-half/")
+(autoload 'ack-and-a-half-same "ack-and-a-half" nil t)
+(autoload 'ack-and-a-half "ack-and-a-half" nil t)
+(autoload 'ack-and-a-half-find-file-same "ack-and-a-half" nil t)
+(autoload 'ack-and-a-half-find-file "ack-and-a-half" nil t)
+(defalias 'ack 'ack-and-a-half)
+(defalias 'ack-same 'ack-and-a-half-same)
+(defalias 'ack-find-file 'ack-and-a-half-find-file)
+(defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
 
 ;; window and session management
 (require 'workgroups)
