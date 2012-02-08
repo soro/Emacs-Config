@@ -19,3 +19,6 @@
 [submodule "evil"]
 	path = evil
 	url = git://gitorious.org/evil/evil.git
+[submodule "vendor/evil-surround"]
+	path = vendor/evil-surround
+	url = https://github.com/timcharper/evil-surround.git

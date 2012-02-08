@@ -24,22 +24,29 @@
                            bookmark+
                            auctex
                            magit
-                           magit-gh-pulls
                            magithub
                            gist))
-
-
-;; yes, i've given in once again, the seductive powers of evil are just too great
-(add-to-list 'load-path "~/.emacs.d/evil")
-(require 'evil)
-;; disable by default until i'm happy with emacs and insert mode..
-;;(evil-mode 1)
-
+;; magit-gh-pulls doesn't work because of a borken dependency on eieio 1.4
 
 (dolist (pac default-packages)
   (when (not (package-installed-p pac))
     (package-install pac)))
 
+;; yes, i've given in once again, the seductive powers of evil are just too great
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)
+(evil-mode 1)
+
+;; make i go into emacs state and esc switch back to normal mode
+(define-key evil-normal-state-map "i" 'evil-emacs-state)
+(define-key evil-emacs-state-map [escape] 'evil-force-normal-state)
+(define-key evil-emacs-state-map "\C-o" 'evil-execute-in-normal-state)
+
+;; surround.vim for evil - not quite as nice as paredit but can
+;; sometimes be useful
+(add-to-list 'load-path "/.emacs.d/vendor/evil-surround/")
+(require 'surround)
+(add-hook 'evil-mode-hook (surround-mode 1))
 
 ;; rebind command and option on osx
 (when (eq system-type 'darwin)
@@ -49,8 +56,8 @@
 ;; provide a bit more tiling feel to emacs buffers
 (global-set-key (kbd "H-j") (lambda () (interactive) (enlarge-window 5)))
 (global-set-key (kbd "H-k") (lambda () (interactive) (enlarge-window -5)))
-(global-set-key (kbd "H-l") (lambda () (interactive) (enlarge-window -5 t)))
-(global-set-key (kbd "H-h") (lambda () (interactive) (enlarge-window 5 t)))
+(global-set-key (kbd "H-h") (lambda () (interactive) (enlarge-window -5 t)))
+(global-set-key (kbd "H-l") (lambda () (interactive) (enlarge-window 5 t)))
 
 ;; set up ack and a half
 (add-to-list 'load-path "~/.emacs.d/vendor/ack-and-a-half/")
