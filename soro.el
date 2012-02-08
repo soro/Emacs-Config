@@ -32,6 +32,8 @@
   (when (not (package-installed-p pac))
     (package-install pac)))
 
+(set-default-font "-misc-inconsolata-medium-r-normal--14-0-0-0-p-0-iso8859-15")
+
 ;; yes, i've given in once again, the seductive powers of evil are just too great
 (add-to-list 'load-path "~/.emacs.d/evil")
 (require 'evil)
