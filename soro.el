@@ -44,7 +44,7 @@
 
 ;; surround.vim for evil - not quite as nice as paredit but can
 ;; sometimes be useful
-(add-to-list 'load-path "/.emacs.d/vendor/evil-surround/")
+(add-to-list 'load-path "~/.emacs.d/vendor/evil-surround/")
 (require 'surround)
 (add-hook 'evil-mode-hook (surround-mode 1))
 
