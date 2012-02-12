@@ -41,10 +41,11 @@
 (define-key evil-normal-state-map "i" 'evil-emacs-state)
 (define-key evil-emacs-state-map [escape] 'evil-force-normal-state)
 (define-key evil-emacs-state-map "\C-o" 'evil-execute-in-normal-state)
+(add-hook 'emacs-state-entry-hook (remove-hook 'activate-mark-hook #'evil-visual-activate-hook))
 
 ;; surround.vim for evil - not quite as nice as paredit but can
 ;; sometimes be useful
-(add-to-list 'load-path "/.emacs.d/vendor/evil-surround/")
+(add-to-list 'load-path "~/.emacs.d/vendor/evil-surround/")
 (require 'surround)
 (add-hook 'evil-mode-hook (surround-mode 1))
 
