@@ -35,13 +35,19 @@
 ;; yes, i've given in once again, the seductive powers of evil are just too great
 (add-to-list 'load-path "~/.emacs.d/evil")
 (require 'evil)
-(evil-mode 1)
+;; disable evil mode by default for now, still has too many quirks in
+;; unmodified version..
+;;(evil-mode 1)
 
 ;; make i go into emacs state and esc switch back to normal mode
 (define-key evil-normal-state-map "i" 'evil-emacs-state)
 (define-key evil-emacs-state-map [escape] 'evil-force-normal-state)
 (define-key evil-emacs-state-map "\C-o" 'evil-execute-in-normal-state)
-(add-hook 'emacs-state-entry-hook (remove-hook 'activate-mark-hook #'evil-visual-activate-hook))
+(setq evil-default-cursor t)
+(add-to-list 'evil-emacs-state-modes 'el-get-package-menu-mode)
+(add-to-list 'evil-emacs-state-modes 'magit-log-edit-mode)
+(add-to-list 'evil-emacs-state-modes 'org-mode)
+
 
 ;; surround.vim for evil - not quite as nice as paredit but can
 ;; sometimes be useful
@@ -95,8 +101,8 @@
 
 ;; A quick & ugly PATH solution for Emacs on Mac OSX
 (when (string-equal "darwin" (symbol-name system-type))
-  (setenv "PATH" (concat "/Users/soro/.cabal/bin:/usr/local/homebrew/bin:/Applications/Racket/bin:" (getenv "PATH")))
-  (setq exec-path (append exec-path '("/Users/soro/.cabal/bin" "/usr/local/homebrew/bin" "/Applications/Racket/bin"))))
+  (setenv "PATH" (concat "/Users/soro/.cabal/bin:/usr/local/homebrew/bin:/Applications/Racket/bin:/usr/local/bin" (getenv "PATH")))
+  (setq exec-path (append exec-path '("/Users/soro/.cabal/bin" "/usr/local/homebrew/bin" "/Applications/Racket/bin" "/usr/local/bin"))))
 
 ;; proof general and Coq
 (load-file "~/.emacs.d/vendor/ProofGeneral/generic/proof-site.el")
@@ -190,6 +196,19 @@
 			      'my-isearch-yank-word-or-char-from-beginning
 			      isearch-mode-map)))
 ;; =============
+
+
+;; Growl utilities
+(defvar growlnotify (executable-find "growlnotify") "Path to growlnotify")
+(defun growl (title message)
+  "Display notification with title and message"
+  (flet ((encode (str) (encode-coding-string str (keyboard-coding-system))))
+    (start-process "growlnotify" nil 
+                   growlnotify
+                   "-t" (encode title)
+                   "-a" "Emacs"
+                   "-n" "Emacs"
+                   "-m" (encode message))))
 
 
 (server-start)
