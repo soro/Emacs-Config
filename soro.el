@@ -57,9 +57,13 @@
     (set-cursor-color (def-assoc evil-state cursor-colors default))))
 
 ;; make i go into emacs state and esc switch back to normal mode
-(define-key evil-normal-state-map "i" 'evil-emacs-state)
 (define-key evil-emacs-state-map [escape] 'evil-force-normal-state)
 (define-key evil-emacs-state-map "\C-o" 'evil-execute-in-normal-state)
+
+(setq evil-default-cursor t)
+(add-to-list 'evil-emacs-state-modes 'el-get-package-menu-mode)
+(add-to-list 'evil-emacs-state-modes 'magit-log-edit-mode)
+(add-to-list 'evil-emacs-state-modes 'org-mode)
 
 ;; surround.vim for evil - not quite as nice as paredit but can
 ;; sometimes be useful
