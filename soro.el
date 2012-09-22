@@ -35,9 +35,22 @@
 ;; yes, i've given in once again, the seductive powers of evil are just too great
 (add-to-list 'load-path "~/.emacs.d/evil")
 (require 'evil)
-;; disable evil mode by default for now, still has too many quirks in
-;; unmodified version..
-;;(evil-mode 1)
+;; remove all keybindings from insert-state keymap
+(setcdr evil-insert-state-map nil) 
+;; but [escape] should switch back to normal state
+(define-key evil-insert-state-map [escape] 'evil-normal-state'
+
+;; adjust cursor colors
+(defun cofi/evil-cursor ()
+  "Change cursor color according to evil-state."
+  (let ((default "OliveDrab4")
+        (cursor-colors '((insert . "dark orange")
+                         (emacs  . "sienna")
+                         (visual . "white"))))
+    (setq cursor-type (if (eq evil-state 'visual)
+                          'hollow
+                        'bar))
+    (set-cursor-color (def-assoc evil-state cursor-colors default))))
 
 ;; make i go into emacs state and esc switch back to normal mode
 (define-key evil-normal-state-map "i" 'evil-emacs-state)
@@ -153,6 +166,7 @@
     ("|@|" " ⊛" nil 0)
     ("forever" "∞" nil 0)
     ("jjoin" "μ" nil 0)
+    ("zero" "∅" nil 0)
     ("cojoin" "υ" nil 0)
     ("copure" "ε" nil 0)
     ("comap" "∙" nil 0)
