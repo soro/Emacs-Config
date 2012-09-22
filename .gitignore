@@ -12,4 +12,6 @@ eshell/*
 places
 url/cookies
 
+ac-comphist.dat
+abbrev_defs
 .emacs.desktop
