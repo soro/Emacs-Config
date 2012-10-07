@@ -22,3 +22,6 @@
 [submodule "vendor/evil-surround"]
 	path = vendor/evil-surround
 	url = https://github.com/timcharper/evil-surround.git
+[submodule "vendor/helm"]
+	path = vendor/helm
+	url = https://github.com/emacs-helm/helm.git
