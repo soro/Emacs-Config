@@ -11,6 +11,7 @@ elpa/*
 eshell/*
 places
 url/cookies
+vendor/*
 
 ac-comphist.dat
 abbrev_defs

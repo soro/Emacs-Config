@@ -26,13 +26,22 @@
                            magit
                            magithub
                            gist))
-;; magit-gh-pulls doesn't work because of a borken dependency on eieio 1.4
+;; magit-gh-pulls doesn't work because of a borken dependency on eieio
+;; 1.4
 
 (dolist (pac default-packages)
   (when (not (package-installed-p pac))
     (package-install pac)))
 
-(set-default-font "-misc-inconsolata-medium-r-normal--14-0-0-0-p-0-iso8859-15")
+(set-default-font "-misc-mensch-medium-r-normal--14-0-0-0-p-0-iso8859-15")
+
+;; setup helm
+(add-to-list 'load-path "~/.emacs.d/vendor/helm")
+(require 'helm-config)
+(helm-mode 1)
+
+;; load magit
+(require 'magit)
 
 ;; yes, i've given in once again, the seductive powers of evil are just too great
 (add-to-list 'load-path "~/.emacs.d/evil")
@@ -42,7 +51,7 @@
 ;; remove all keybindings from insert-state keymap
 (setcdr evil-insert-state-map nil) 
 ;; but [escape] should switch back to normal state
-(define-key evil-insert-state-map [escape] 'evil-normal-state'
+(define-key evil-insert-state-map [escape] 'evil-normal-state)
 
 ;; adjust cursor colors
 (defun cofi/evil-cursor ()
@@ -111,9 +120,6 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/solarized-theme/")
 (add-to-list 'load-path "~/.emacs.d/vendor/solarized-theme/")
 (load-theme 'solarized-dark 't)
-
-;; load textmate-mode for peepopen
-(textmate-mode)
 
 ;; A quick & ugly PATH solution for Emacs on Mac OSX
 (when (string-equal "darwin" (symbol-name system-type))
@@ -195,6 +201,47 @@
 			     'isearch-yank-word-or-char
 			     isearch-mode-map))
 
+
+
+(global-set-key (kbd "H-t") (lambda () (interactive) (helm-find-files)))
+
+(defun helm-find-files ()
+  (interactive)
+  (helm 'anything-c-source-git-project-files))
+
+(defvar helm-c-source-git-project-files-cache nil "(path signature cached-buffer)")
+(defvar helm-c-source-git-project-files
+  '((name . "Files from Current GIT Project")
+    (init . (lambda ()
+              (let* ((git-top-dir (magit-get-top-dir (if (buffer-file-name)
+                                                         (file-name-directory (buffer-file-name))
+                                                       default-directory)))
+                     (top-dir (if git-top-dir
+                                  (file-truename git-top-dir)
+                                default-directory))
+                     (default-directory top-dir)
+                     (signature (magit-rev-parse "HEAD")))
+
+                (unless (and helm-c-source-git-project-files-cache
+                             (third helm-c-source-git-project-files-cache)
+                             (equal (first helm-c-source-git-project-files-cache) top-dir)
+                             (equal (second helm-c-source-git-project-files-cache) signature))
+                  (if (third helm-c-source-git-project-files-cache)
+                      (kill-buffer (third helm-c-source-git-project-files-cache)))
+                  (setq helm-c-source-git-project-files-cache
+                        (list top-dir
+                              signature
+                              (helm-candidate-buffer 'global)))
+                  (with-current-buffer (third helm-c-source-git-project-files-cache)
+                    (dolist (filename (mapcar (lambda (file) (concat default-directory file))
+                                              (magit-git-lines "ls-files")))
+                      (insert filename)
+                      (newline))))
+                (helm-candidate-buffer (third helm-c-source-git-project-files-cache)))))
+
+    (type . file)
+    (candidates-in-buffer)))
+
 (add-hook 'isearch-mode-hook
  (lambda ()
    "Activate my customized Isearch word yank command."
@@ -202,6 +249,5 @@
 			      'my-isearch-yank-word-or-char-from-beginning
 			      isearch-mode-map)))
 ;; =============
-
 
 (server-start)
