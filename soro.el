@@ -207,7 +207,7 @@
 
 (defun helm-find-files ()
   (interactive)
-  (helm 'anything-c-source-git-project-files))
+  (helm 'helm-c-source-git-project-files))
 
 (defvar helm-c-source-git-project-files-cache nil "(path signature cached-buffer)")
 (defvar helm-c-source-git-project-files
