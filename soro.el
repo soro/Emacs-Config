@@ -110,6 +110,8 @@
 
 ;; haskell support
 (load "~/.emacs.d/vendor/haskell-mode/haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 
 ;; racket support
 (load-file "~/.emacs.d/vendor/geiser/elisp/geiser.el")
