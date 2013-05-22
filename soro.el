@@ -33,7 +33,7 @@
   (when (not (package-installed-p pac))
     (package-install pac)))
 
-(set-default-font "-misc-mensch-medium-r-normal--14-0-0-0-p-0-iso8859-15")
+(set-default-font "-misc-mensch-medium-r-normal--18-0-0-0-p-0-iso8859-15")
 
 ;; setup helm
 (add-to-list 'load-path "~/.emacs.d/vendor/helm")
@@ -42,6 +42,10 @@
 
 ;; load magit
 (require 'magit)
+
+;; load jira mode
+;;(require 'jira)
+;;(setq jira-url "https://patchy.onjira.com/secure/Dashboard.jspa")
 
 ;; yes, i've given in once again, the seductive powers of evil are just too great
 (add-to-list 'load-path "~/.emacs.d/evil")
@@ -154,7 +158,7 @@
 ;; load ensime
 (add-to-list 'load-path "~/.emacs.d/vendor/ensime/elisp/")
 (require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+;;(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 ;; set up abbrevs for unicode symbols
 (define-abbrev-table 'global-abbrev-table '(
