@@ -29,9 +29,9 @@
 ;; magit-gh-pulls doesn't work because of a borken dependency on eieio
 ;; 1.4
 
-(dolist (pac default-packages)
-  (when (not (package-installed-p pac))
-    (package-install pac)))
+;; (dolist (pac default-packages)
+;;   (when (not (package-installed-p pac))
+;;     (package-install pac)))
 
 (set-default-font "-misc-mensch-medium-r-normal--14-0-0-0-p-0-iso8859-15")
 
